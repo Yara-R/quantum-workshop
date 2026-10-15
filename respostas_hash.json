@@ -1,0 +1,188 @@
+{
+  "intro-1": {
+    "tipo": "numero",
+    "hash": "04bd088be6c6f4228903a04eab7817db13463da0b94cbbad21063f4216a49380",
+    "dica": "A regra de Born estabelece que a probabilidade de um resultado é o módulo ao quadrado de sua amplitude. A amplitude de |1> é 0.8. Responda como um decimal entre 0 e 1.",
+    "explicacao": "Correto. Pela regra de Born, P(1) = |0.8|^2 = 0.64. Observe também que 0.6^2 + 0.8^2 = 1, ou seja, as probabilidades somam 1 — condição de normalização do estado."
+  },
+  "intro-2": {
+    "tipo": "prob",
+    "hash": "cf9dcf6da8a82be1335c398a4005def7ee3a53d4698c59dbc6b2b14e72d1263c",
+    "dica": "É preciso levar o qubit de |0> a |1> com probabilidade 1. A porta que inverte o qubit, análoga ao NOT clássico, é a porta X (qc.x(0)).",
+    "explicacao": "Correto. A porta X é o análogo quântico do NOT: leva |0> em |1>. Na esfera de Bloch, corresponde a uma rotação de pi em torno do eixo X, transportando o estado do polo norte ao polo sul.",
+    "params": {
+      "alvo": "1"
+    }
+  },
+  "intro-3": {
+    "tipo": "prob",
+    "hash": "561b2814d3c09e62a92442c946307918f7f63f833c84876c08bd4c406767e53b",
+    "dica": "As portas quânticas são reversíveis: aplicar a mesma porta duas vezes desfaz o seu efeito. O circuito já começa com uma Hadamard (estado |+>). Que porta o traz de volta a |0>, deixando P(1)=0? Use qc.h(0).",
+    "explicacao": "Correto. A Hadamard é a sua própria inversa: aplicada a |+> devolve |0>, logo P(1)=0. Toda porta quântica é reversível — é o postulado da evolução (as operações são unitárias). Isso a distingue de operações clássicas como o AND, que apagam informação e não podem ser desfeitas.",
+    "params": {
+      "alvo": "1"
+    }
+  },
+  "intro-4": {
+    "tipo": "prob",
+    "hash": "a30a043314fa89294fa2c1c989a01fbb5329e5c085a5c5a8d27317656de24ae0",
+    "dica": "Para Ry(theta) aplicada a |0>, tem-se P(1) = sin^2(theta/2). Iguale a 0.25, obtenha sin(theta/2) = 0.5 e resolva para theta em radianos. Use qc.ry(theta, 0).",
+    "explicacao": "Correto. De sin(theta/2) = 0.5 obtém-se theta/2 = pi/6 e, portanto, theta = pi/3 ≈ 1.047 rad. A rotação Ry permite ajustar continuamente a probabilidade entre 0 e 1 — princípio central do controle de qubits e dos algoritmos variacionais.",
+    "params": {
+      "alvo": "1"
+    }
+  },
+  "intro-5": {
+    "tipo": "prob",
+    "hash": "ce5d3aa79ae56155078af52e8fac68eb2d0a78489f82bc26c1e1bbc667ba9fde",
+    "dica": "Mesmo raciocínio do exercício anterior: de sin^2(theta/2) = 0.75 vem sin(theta/2) = raiz(0.75). Resolva para theta em radianos (np.arcsin e np.sqrt ajudam) e use qc.ry(theta, 0).",
+    "explicacao": "Correto. De sin(theta/2) = raiz(0.75) obtém-se theta/2 = pi/3 e, portanto, theta = 2*pi/3 ≈ 2.094 rad. Note a simetria com o caso P(1)=0.25 (theta = pi/3): ângulos que somam pi trocam os papéis de |0> e |1>. O mesmo comando controla toda a faixa de 0 a 1.",
+    "params": {
+      "alvo": "1"
+    }
+  },
+  "intro-6": {
+    "tipo": "multipla",
+    "hash": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+    "dica": "A porta Rz gira o estado em torno do eixo Z da esfera de Bloch, movendo-o ao longo do equador. Isso não altera a distância aos polos |0> e |1>. O que muda, então?",
+    "explicacao": "Correto. Rz(theta) altera a fase relativa entre |0> e |1>, sem modificar as probabilidades de medição na base computacional. A fase não aparece em uma medida na base Z, mas é o que produz a interferência responsável pelo funcionamento dos algoritmos."
+  },
+  "intro-7": {
+    "tipo": "multipla",
+    "hash": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+    "dica": "Os estados |+> e |-> apresentam as mesmas probabilidades (50/50) em uma medida na base Z; diferem apenas no sinal (fase) da amplitude de |1>. Como a medida em Z não distingue fase, o que é necessário fazer?",
+    "explicacao": "Correto. |+> e |-> diferem somente na fase, invisível a uma medida na base computacional (Z). Para distingui-los, mede-se na base X (aplicando uma porta H antes da medição): assim |+> resulta em 0 e |-> resulta em 1. A base de medição determina o que se pode observar."
+  },
+  "intro-8": {
+    "tipo": "texto",
+    "hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "dica": "Prepare |-> a partir de |0> com X seguido de H (menos.x(0); menos.h(0)) e rode medir(menos, 'X'). Medir na base X aplica uma H antes da medição, levando |-> a |1>. Observe a saída: que bit aparece?",
+    "explicacao": "Correto. Na base X, |-> resulta sempre em 1 (e |+> em 0). A fase que distingue |+> de |-> é invisível na base Z, mas vira um resultado definido quando escolhemos a base de medição adequada — o resultado de uma medição (postulado 3) depende da base em que se mede."
+  },
+  "intro-9": {
+    "tipo": "circuito",
+    "hash": "1bb0cde914b166ba97c3d6a4ca1a5bbd9d4a1175672802e5a789c5d749798abe",
+    "dica": "O estado de Bell requer duas portas: primeiro uma Hadamard no qubit 0 e, em seguida, um CNOT (cx) com controle 0 e alvo 1. Não inclua outras portas além dessas (a medição pode permanecer).",
+    "explicacao": "Correto. A porta H cria superposição no primeiro qubit e o CNOT(0,1) correlaciona o segundo ao primeiro. O estado resultante não pode ser descrito como dois qubits independentes — é emaranhado."
+  },
+  "intro-10": {
+    "tipo": "conjunto",
+    "hash": "0a785f1fd2c1973f4009e866c2cc3b7c00482025f3cdd2958473e973285e7168",
+    "dica": "No estado de Bell os dois qubits estão sempre correlacionados: quando um resulta em 0, o outro também; o mesmo para 1. Que pares isso permite? Responda como conjunto, ex.: {\"00\", \"11\"}.",
+    "explicacao": "Correto. Apenas '00' e '11' ocorrem, cada um com cerca de 50%; '01' e '10' nunca aparecem. Cada medição individual é aleatória, mas os dois qubits sempre concordam — assinatura do emaranhamento."
+  },
+  "intro-11": {
+    "tipo": "conjunto",
+    "hash": "77afd21729204b076ed3a67df10c4ea932d4c310c7ef26cbd1753d0113ff961a",
+    "dica": "Parta do estado de Bell (H no qubit 0, depois CNOT) e acrescente uma porta X em um dos qubits para invertê-lo. Rode o circuito e observe: os dois qubits passam a sair sempre opostos. Responda como conjunto.",
+    "explicacao": "Correto. Uma porta X após o CNOT converte o par correlacionado {00, 11} no par anti-correlacionado {01, 10} — outro dos quatro estados de Bell. O emaranhamento permanece: medir um qubit ainda determina o outro, agora com o valor oposto."
+  },
+  "intro-12": {
+    "tipo": "multipla",
+    "hash": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+    "dica": "O simulador reproduz a matemática ideal; o hardware é físico e sofre interferências do ambiente. Qual é o nome desse fenômeno?",
+    "explicacao": "Correto. O hardware real está sujeito a ruído e decoerência — vibrações, temperatura e imperfeições nas portas. Por isso surgem resultados proibidos (01, 10 em um estado de Bell). A redução desse ruído é um dos principais desafios atuais da área."
+  },
+  "intro-13": {
+    "tipo": "inteiro",
+    "hash": "b17ef6d19c7a5b1ee83b907c595526dcb1eb06db8227d650d5dda0a9f4ce8cd9",
+    "dica": "Cada qubit medido fornece 1 bit aleatório. Com 4 bits, quantos valores distintos podem ser formados? Considere 2^4.",
+    "explicacao": "Correto. Quatro qubits produzem 4 bits, isto é, 2^4 = 16 valores possíveis (de 0000 a 1111). Diferentemente de um computador clássico, essa aleatoriedade é genuína, de origem física."
+  },
+  "inter-1": {
+    "tipo": "circuito",
+    "hash": "8569cb870be5c8cf186ab8f4bb5d829bdc0690c252802994b2284006c2d5dec1",
+    "dica": "Para colocar dois qubits em superposição simultaneamente, aplique uma Hadamard em cada um: no qubit 0 e no qubit 1.",
+    "explicacao": "Correto. Duas Hadamards produzem superposição uniforme sobre os quatro estados (00, 01, 10, 11), cada um com cerca de 25%. Com N Hadamards exploram-se 2^N estados simultaneamente."
+  },
+  "inter-2": {
+    "tipo": "circuito",
+    "hash": "f607dc68d7ff361f9caccf46f11d4e2b15bceb60865c36c8dbac5a9012b4b94e",
+    "dica": "O estado GHZ generaliza o de Bell para três qubits. Comece com H no qubit 0 e encadeie cx(0,1) e cx(1,2). Não inclua outras portas (a medição pode permanecer).",
+    "explicacao": "Correto. A sequência H(0), CNOT(0,1), CNOT(1,2) emaranha os três qubits. Ao medir, apenas '000' e '111' ocorrem — emaranhamento de múltiplas partículas, relevante em correção de erros e comunicação quântica."
+  },
+  "inter-3": {
+    "tipo": "conjunto",
+    "hash": "81dd08779e84b547301b1e16e6a6688c5a4a156173e28e19d3bc22f8ce04442e",
+    "dica": "Os três qubits do GHZ estão correlacionados: ou todos 0, ou todos 1. Responda como conjunto, ex.: {\"000\", \"111\"}.",
+    "explicacao": "Correto. O GHZ produz apenas '000' e '111'. Trata-se de uma correlação de três corpos: medir um qubit determina imediatamente os outros dois."
+  },
+  "inter-4": {
+    "tipo": "multipla",
+    "hash": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+    "dica": "Superposição sozinha equivaleria a um sorteio aleatório. O que diferencia um algoritmo quântico é o modo como as amplitudes se combinam. O que ocorre com as amplitudes das respostas certas e erradas?",
+    "explicacao": "Correto. A interferência é o mecanismo central: o circuito é projetado para que as amplitudes das respostas erradas se cancelem (interferência destrutiva) e as das corretas se reforcem (construtiva). É isso que distingue computação quântica de um sorteio."
+  },
+  "inter-5": {
+    "tipo": "texto",
+    "hash": "01ba97ed47709cecc1b73d0fca8bae6e4dd71e25a02ff59dae8c8162d67a786f",
+    "dica": "No algoritmo de Deutsch-Jozsa, medir todos os qubits de entrada e obter apenas zeros indica um dos dois tipos de função. Qual: constante ou balanceada?",
+    "explicacao": "Correto. Um resultado 0...0 indica função constante. O algoritmo de Deutsch-Jozsa determina isso com uma única execução, enquanto um método clássico poderia exigir, no pior caso, metade das entradas mais uma."
+  },
+  "inter-6": {
+    "tipo": "texto",
+    "hash": "3dd9c0995d54c0abd51a90f1d57b1ce77bc885fc8a7cea52dcad3c2540dda5ee",
+    "dica": "No algoritmo de Bernstein-Vazirani, a medição dos qubits de entrada revela diretamente a string secreta do oráculo. Rode o circuito fornecido e observe qual bitstring é medida.",
+    "explicacao": "Correto. Bernstein-Vazirani recupera a string secreta (1011) com uma única consulta ao oráculo, ao passo que um método clássico precisaria de uma consulta por bit. É um exemplo claro de vantagem obtida por interferência."
+  },
+  "inter-7": {
+    "tipo": "inteiro",
+    "hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "dica": "O número ótimo de iterações de Grover é aproximadamente (pi/4)*raiz(N). Para N=16, calcule e arredonde para o inteiro mais próximo.",
+    "explicacao": "Correto. (pi/4)*raiz(16) = (pi/4)*4 ≈ 3.14, portanto 3 iterações. Grover localiza um item em cerca de raiz(N) passos, contra aproximadamente N/2 de uma busca clássica — aceleração quadrática."
+  },
+  "inter-8": {
+    "tipo": "conjunto",
+    "hash": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "dica": "Ajuste o oráculo de Grover para marcar o estado |10> e execute o circuito. Qual resultado passa a dominar as medições? Responda como conjunto, ex.: {\"10\"}.",
+    "explicacao": "Correto. Ao marcar |10>, a amplificação de amplitude faz esse estado dominar as medições. O oráculo apenas 'marca' a solução com uma fase; é o difusor que converte essa marcação em probabilidade observável."
+  },
+  "full-1": {
+    "tipo": "multipla",
+    "hash": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+    "dica": "A mitigação de erros não modifica o hardware; ela executa o circuito e trata os dados posteriormente. O que ela faz com os resultados?",
+    "explicacao": "Correto. A mitigação de erros emprega técnicas estatísticas de pós-processamento para estimar e reduzir o efeito do ruído nos resultados, sem eliminá-lo fisicamente. Distingue-se da correção de erros, que utiliza qubits adicionais para proteger a informação."
+  },
+  "full-2": {
+    "tipo": "conjunto",
+    "hash": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+    "dica": "O algoritmo de Grover amplifica a probabilidade do estado marcado. Se o estado marcado é |11>, qual resultado deve dominar a medição? Responda como conjunto, ex.: {\"11\"}.",
+    "explicacao": "Correto. Grover amplifica o estado marcado |11>, que passa a concentrar a maioria das medições. Foi assim que a busca destacou a solução entre as quatro possibilidades."
+  },
+  "full-3": {
+    "tipo": "multipla",
+    "hash": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+    "dica": "No teletransporte quântico nada material é transportado. O que é reconstruído no qubit de destino?",
+    "explicacao": "Correto. O teletransporte quântico transfere o estado quântico de um qubit a outro, usando emaranhamento e dois bits clássicos. Nenhuma matéria ou energia é transportada, e o estado original é destruído no processo (teorema da não-clonagem)."
+  },
+  "full-4": {
+    "tipo": "multipla",
+    "hash": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+    "dica": "Considere o domínio em que o sistema a ser modelado já é quântico por natureza, o que o torna difícil para computadores clássicos.",
+    "explicacao": "Correto. A simulação de moléculas e materiais (química quântica) é uma das aplicações mais promissoras: como a natureza é quântica, um computador quântico é a ferramenta apropriada para modelá-la, com impacto potencial em fármacos, baterias e catalisadores."
+  },
+  "full-5": {
+    "tipo": "inteiro",
+    "hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "dica": "Use (pi/4)*raiz(N) para N=8 e arredonde para o inteiro mais próximo.",
+    "explicacao": "Correto. (pi/4)*raiz(8) ≈ 2.22, portanto 2 iterações. O número de iterações cresce com a raiz de N, e não com N — essência do ganho quadrático de Grover."
+  },
+  "full-6": {
+    "tipo": "circuito",
+    "hash": "c641c6ee68721473c39491dae873f28abd0381e3bbdc132e58911baa3f7e050c",
+    "dica": "Projeto final: um estado GHZ de 4 qubits. Aplique H no qubit 0 e, em seguida, a cadeia cx(0,1), cx(1,2), cx(2,3). Não inclua portas extras (a medição pode permanecer).",
+    "explicacao": "Correto. Você generalizou o padrão GHZ para 4 qubits. Esse tipo de estado emaranhado de múltiplos corpos é empregado em protocolos de correção de erros e em metrologia quântica."
+  },
+  "full-7": {
+    "tipo": "numero",
+    "hash": "e01d0d299887b8f466aab4fe3999250779683e5647eb750148986d78a95d3588",
+    "dica": "A energia é o valor esperado <Z>. Para o estado Ry(theta)|0>, tem-se <Z> = cos(theta), que varia entre -1 e 1. Qual é o menor valor possível? Responda como número (ex.: -1).",
+    "explicacao": "Correto. O menor valor de <Z> é -1, atingido em theta = pi, quando o estado é |1>. Esse é o princípio do VQE: variar parâmetros de um circuito para minimizar uma energia (valor esperado)."
+  },
+  "full-8": {
+    "tipo": "multipla",
+    "hash": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+    "dica": "O algoritmo de Shor fatora inteiros grandes com eficiência. Qual esquema de criptografia amplamente usado depende justamente da dificuldade dessa fatoração?",
+    "explicacao": "Correto. O algoritmo de Shor ameaça o RSA, cuja segurança se baseia na dificuldade de fatorar números grandes. É essa perspectiva que motiva a transição mundial para a criptografia pós-quântica."
+  }
+}
